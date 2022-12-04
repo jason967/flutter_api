@@ -3,6 +3,7 @@ package com.service;
 import com.domain.navigation.NavigationRepository;
 import com.domain.navigation.Navigations;
 import com.web.dto.NavigationDto;
+import com.web.dto.NavigationListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public class NavigationService {
     public List<NavigationDto> findAll() {
         System.out.println("asdasdasd->"+navigationRepository.toString());
         return navigationRepository.findAll().stream().map(NavigationDto::new).collect(Collectors.toList());
+
+//        return navigationRepository.findAll().stream().map(NavigationDto::new).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

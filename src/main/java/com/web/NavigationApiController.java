@@ -14,7 +14,7 @@ import java.util.List;
 public class NavigationApiController {
     private final NavigationService navigationService;
 
-    @GetMapping("/api/navigation")
+    @GetMapping(value = "/api/navigation",produces = "application/json; charset=utf8")
     public List<NavigationDto> getAllNavigation() {
         System.out.println("asdasdasd->"+navigationService.toString());
 
