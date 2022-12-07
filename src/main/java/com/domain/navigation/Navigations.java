@@ -16,16 +16,19 @@ public class Navigations {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String naviId;
+    private int naviId;
     private String title;
     private String subtitle;
     private String apiUrl;
+    private String naviType;
+
 
     @Builder
-    public Navigations(String naviId, String title, String subtitle, String apiUrl) {
+    public Navigations(int naviId, String title, String subtitle, String apiUrl, String naviType) {
         this.naviId = naviId;
         this.title = title;
         this.subtitle = subtitle;
         this.apiUrl = apiUrl;
+        this.naviType = naviType;
     }
 }

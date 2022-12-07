@@ -7,17 +7,18 @@ import java.util.List;
 
 @Getter
 public class NavigationDto {
-    private final String naviId;
+    private final int naviId;
     private final String title;
     private final String subtitle;
     private final String apiUrl;
-
+    private final String naviType;
 
     public NavigationDto(Navigations entity) {
         this.naviId = entity.getNaviId();
         this.title = entity.getTitle();
         this.subtitle = entity.getSubtitle();
         this.apiUrl = entity.getApiUrl();
+        this.naviType=entity.getNaviType();
     }
 
 }
