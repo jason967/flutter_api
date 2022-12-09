@@ -17,6 +17,8 @@ out/
 !**/src/test/**/out/
 
 application.properties
+application-real-db.properties
+
 
 ### Eclipse ###
 .apt_generated
