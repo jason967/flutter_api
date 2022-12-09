@@ -30,7 +30,7 @@ class NavigationRepositoryTest {
         String subtitle="자신있게 추천해요";
         String apiUrl = "https://www.naver.com";
         ///save : 존재 O-> update, 존재 X -> insert & update
-        navigationRepository.save(Navigations.builder()
+        navigationRepository.save(Navigation.builder()
                 .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
@@ -38,9 +38,9 @@ class NavigationRepositoryTest {
                 .build());
 
         //when
-        List<Navigations> navigationsList = navigationRepository.findAll();
+        List<Navigation> navigationsList = navigationRepository.findAll();
 
-        Navigations navigation = navigationsList.get(0);
+        Navigation navigation = navigationsList.get(0);
         assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
 
@@ -55,16 +55,16 @@ class NavigationRepositoryTest {
         String apiUrl = "https://www.naver.com";
 
         ///save : 존재 O-> update, 존재 X -> insert & update
-        navigationRepository.save(Navigations.builder()
+        navigationRepository.save(Navigation.builder()
                 .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
                 .apiUrl(apiUrl)
                 .build());
         //when
-        List<Navigations> navigationList = navigationRepository.findAll();
+        List<Navigation> navigationList = navigationRepository.findAll();
 
-        Navigations navigation = navigationList.get(0);
+        Navigation navigation = navigationList.get(0);
         assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
         assertThat(navigation.getSubtitle()).isEqualTo(subtitle);

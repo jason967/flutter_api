@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Navigations {
+public class Navigation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -24,7 +24,7 @@ public class Navigations {
 
 
     @Builder
-    public Navigations(int naviId, String title, String subtitle, String apiUrl, String naviType) {
+    public Navigation(int naviId, String title, String subtitle, String apiUrl, String naviType) {
         this.naviId = naviId;
         this.title = title;
         this.subtitle = subtitle;

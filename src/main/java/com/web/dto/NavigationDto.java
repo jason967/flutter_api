@@ -1,6 +1,6 @@
 package com.web.dto;
 
-import com.domain.navigation.Navigations;
+import com.domain.navigation.Navigation;
 import lombok.Getter;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class NavigationDto {
     private final String apiUrl;
     private final String naviType;
 
-    public NavigationDto(Navigations entity) {
+    public NavigationDto(Navigation entity) {
         this.naviId = entity.getNaviId();
         this.title = entity.getTitle();
         this.subtitle = entity.getSubtitle();

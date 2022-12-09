@@ -1,7 +1,7 @@
 package com.service;
 
 import com.domain.navigation.NavigationRepository;
-import com.domain.navigation.Navigations;
+import com.domain.navigation.Navigation;
 import com.web.dto.NavigationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,9 @@ public class NavigationService {
 
     @Transactional(readOnly = true)
     public NavigationDto findById(Long id) {
-        Navigations navigations = navigationRepository.findById(id).get();
+        Navigation navigation = navigationRepository.findById(id).get();
 
-        return new NavigationDto(navigations);
+        return new NavigationDto(navigation);
     }
 
     @Transactional(readOnly = true)
