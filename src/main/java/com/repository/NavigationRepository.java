@@ -1,5 +1,6 @@
-package com.domain.navigation;
+package com.repository;
 
+import com.domain.Navigation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

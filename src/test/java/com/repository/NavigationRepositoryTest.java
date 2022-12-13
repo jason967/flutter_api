@@ -1,10 +1,11 @@
-package com.domain.navigation;
+package com.repository;
 
+import com.domain.Navigation;
+import com.repository.NavigationRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -31,7 +32,7 @@ class NavigationRepositoryTest {
         String apiUrl = "https://www.naver.com";
         ///save : 존재 O-> update, 존재 X -> insert & update
         navigationRepository.save(Navigation.builder()
-                .naviId(naviId)
+//                .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
                 .apiUrl(apiUrl)
@@ -41,7 +42,7 @@ class NavigationRepositoryTest {
         List<Navigation> navigationsList = navigationRepository.findAll();
 
         Navigation navigation = navigationsList.get(0);
-        assertThat(navigation.getNaviId()).isEqualTo(naviId);
+//        assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
 
     }
@@ -56,7 +57,7 @@ class NavigationRepositoryTest {
 
         ///save : 존재 O-> update, 존재 X -> insert & update
         navigationRepository.save(Navigation.builder()
-                .naviId(naviId)
+//                .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
                 .apiUrl(apiUrl)
@@ -65,7 +66,7 @@ class NavigationRepositoryTest {
         List<Navigation> navigationList = navigationRepository.findAll();
 
         Navigation navigation = navigationList.get(0);
-        assertThat(navigation.getNaviId()).isEqualTo(naviId);
+//        assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
         assertThat(navigation.getSubtitle()).isEqualTo(subtitle);
         assertThat(navigation.getApiUrl()).isEqualTo(apiUrl);

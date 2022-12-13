@@ -1,5 +1,7 @@
-package com.domain.viewType;
+package com.repository;
 
+import com.domain.ViewType;
+import com.repository.ViewTypeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,8 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -34,7 +34,7 @@ class ViewTypeRepositoryTest {
             int exposePriority = i;
             ///save : 존재 O-> update, 존재 X -> insert & update
             viewTypeRepository.save(ViewType.builder()
-                    .naviId(naviId)
+//                    .naviId(naviId)
                     .viewType(viewType)
                     .description(description)
                     .exposePriority(exposePriority)
@@ -45,12 +45,12 @@ class ViewTypeRepositoryTest {
         PageRequest pageRequest = PageRequest.of(0,10, orderByExposePriorityDesc);
 
         //when
-        List<ViewType> viewTypeList = viewTypeRepository.findAllByNaviId(naviId,pageRequest);
+//        List<ViewType> viewTypeList = viewTypeRepository.findAllByNaviId(naviId,pageRequest);
         System.out.println("야호 ----------------------------------------");
 
-        for(ViewType viewType:viewTypeList){
-            System.out.println(viewType.getExposePriority());
-        }
+//        for(ViewType viewType:viewTypeList){
+//            System.out.println(viewType.getExposePriority());
+//        }
 
     }
 }
