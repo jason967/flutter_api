@@ -13,6 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.ByteArrayOutputStream;
@@ -77,14 +79,17 @@ class NavigationTest {
                         ViewType viewType = ViewType.builder()
                                 .viewType("viewType_" + i)
                                 .title("viewType_title_" + i)
+                                .exposePriority(i)
                                 .component("viewType_component_" + i)
                                 .build();
                         navigation.addViewType(viewType);
                         viewTypeRepository.save(viewType);
-                        for (int j = 100; j <= 110; j++) {
+                        for (int j = 100; j <= 105; j++) {
                             Content content = Content.builder()
                                     .title("content_title_" + j)
-                                    .subtitle("content_subtitle_" + i)
+                                    .price(10000)
+                                    .discount(i*10)
+                                    .subtitle("content_subtitle_" + j)
                                     .build();
                             viewType.addContent(content);
                             contentRepository.save(content);
@@ -100,14 +105,17 @@ class NavigationTest {
                         ViewType viewType = ViewType.builder()
                                 .viewType("viewType_" + i)
                                 .title("viewType_title_" + i)
+                                .exposePriority(i)
                                 .component("viewType_component_" + i)
                                 .build();
                         navigation.addViewType(viewType);
                         viewTypeRepository.save(viewType);
-                        for (int j = 100; j <= 110; j++) {
+                        for (int j = 200; j <= 205; j++) {
                             Content content = Content.builder()
                                     .title("content_title_" + j)
-                                    .subtitle("content_subtitle_" + i)
+                                    .price(1000)
+                                    .discount(i*10)
+                                    .subtitle("content_subtitle_" + j)
                                     .build();
                             viewType.addContent(content);
                             contentRepository.save(content);
@@ -115,66 +123,29 @@ class NavigationTest {
                     }
                 }
             }
-
         }
-
-//
-//        StoreType market = StoreType.builder().storeType("market").build();
-//        storeTypeRepository.save(market);
-//        Navigation n_1 = Navigation.builder().title("컬리추천").build();
-//        navigationRepository.save(n_1);
-//        for (int i = 0; i <= 10; i++) {
-//            ViewType viewType = ViewType.builder()
-//                    .viewType("viewType_" + i)
-//                    .title("viewType_title_"+i)
-//                    .component("viewType_component_"+i)
-//                    .build();
-//            n_1.addViewType(viewType);
-//            viewTypeRepository.save(viewType);
-//            for (int j = 100; j <= 110; j++) {
-//                Content content = Content.builder()
-//                        .title("content_title_" + j)
-//                        .subtitle("content_subtitle_"+i)
-//                        .build();
-//                viewType.addContent(content);
-//                contentRepository.save(content);
-//            }
-//        }
-//
-//        Navigation navigation = Navigation.builder()
-//                .title("테스트 1")
-//                .build();
-//        navigationRepository.save(navigation);
-//        for (int i = 0; i <= 10; i++) {
-//            ViewType viewType = ViewType.builder()
-//                    .viewType("viewType_test_" + i)
-//                    .build();
-//            navigation.addViewType(viewType);
-//            viewTypeRepository.save(viewType);
-//            for (int j = 100; j <= 110; j++) {
-//                Content content = Content.builder().title("content_test_" + j).build();
-//                viewType.addContent(content);
-//                contentRepository.save(content);
-//            }
-//        }
     }
 
     @Test
     public void findViewTypesByNavigationId() throws Exception {
+        int page = 0;
+        int limited = 4;
+        Sort orderByExposePriorityDesc = Sort.by("exposePriority").ascending();
+        PageRequest pageRequest = PageRequest.of(page, limited, orderByExposePriorityDesc);
 
-        List<ViewType> viewTypes = viewTypeRepository.findAllByNavigation_Id(Long.valueOf(1000));
+        List<ViewType> viewTypes = viewTypeRepository.findAllByNavigation_Id(Long.valueOf(1000), pageRequest);
         for (ViewType viewType : viewTypes) {
 //            System.out.println("[test]"+viewType.getViewType());
             originalOut.println("[test]" + viewType.getViewType());
         }
     }
-
-    @Test
-    public void 삭제() throws Exception {
-
-//        Long viewTypeId = new Long(1000) ;
-        viewTypeRepository.deleteById(Long.valueOf(1000));
-    }
+//
+//    @Test
+//    public void 삭제() throws Exception {
+//
+////        Long viewTypeId = new Long(1000) ;
+//        viewTypeRepository.deleteById(Long.valueOf(1000));
+//    }
 
 
 }

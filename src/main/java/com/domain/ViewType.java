@@ -1,5 +1,6 @@
 package com.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @SequenceGenerator(name = "VIEW_TYPE_SEQ_GEN", sequenceName = "VIEW_TYPE_SEQ", initialValue = 1000, allocationSize = 1)
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ViewType {
 
@@ -30,7 +31,7 @@ public class ViewType {
     private String description;
     private int exposePriority;
 
-    @OneToMany(mappedBy = "viewType", fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "viewType" ,cascade = CascadeType.ALL)
     private List<Content> contents = new ArrayList<>();
 
     public void addContent(Content content) {
@@ -40,7 +41,7 @@ public class ViewType {
         }
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "navigation_id")
     private Navigation navigation;
 

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ViewTypeRepository extends JpaRepository<ViewType, Long> {
 //    List<ViewType> findAllByN (int naviId, Pageable pageable);
-    List<ViewType> findAllByNavigation_Id(Long id);
+    List<ViewType> findAllByNavigation_Id(Long id,Pageable pageable);
 }

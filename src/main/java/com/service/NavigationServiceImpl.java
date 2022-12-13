@@ -28,9 +28,9 @@ public class NavigationServiceImpl implements NavigationService {
         return new NavigationDto(navigation);
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public List<NavigationDto> findAllNaviType(String type) {
-
-        return navigationRepository.findNavigationsByNaviType(type).stream().map(NavigationDto::new).collect(Collectors.toList());
+    public List<NavigationDto> findAllByStoreType(String storeType) {
+        return navigationRepository.findAllByStoreType_StoreType(storeType).stream().map(NavigationDto::new).collect(Collectors.toList());
     }
 }

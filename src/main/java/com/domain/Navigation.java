@@ -22,7 +22,7 @@ public class Navigation {
     private String subtitle;
     private String apiUrl;
     private String naviType;
-    @OneToMany(mappedBy = "navigation", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "navigation", cascade = CascadeType.ALL)
     private List<ViewType> viewTypes = new ArrayList<>();
 
     public void addViewType(ViewType viewType) {
@@ -32,7 +32,7 @@ public class Navigation {
         }
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "store_type_id")
     private StoreType storeType;
 

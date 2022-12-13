@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,11 +36,12 @@ public class NavigationApiController {
     @Operation(summary = "get navigation list", description = "네비게이션 타입으로 요청된 navigation list를 가져온다 ")
 
     @Parameters({
-            @Parameter(name = "type", description = "네비게이션의 타입 ex> 뷰티 , 추천 ... etc", example = "beauty"),
+            @Parameter(name = "storetype", description = "네비게이션의 타입 ex> 뷰티 , 추천 ... etc", example = "beauty"),
     })
-    @GetMapping(value = "", produces = "application/json; charset=utf8", params = {"type"})
-    public List<NavigationDto> getAllNavigationByNaviType(@RequestParam(value = "type") String type) {
-        return navigationServiceImpl.findAllNaviType(type);
+
+    @GetMapping(value = "/{storetype}", produces = "application/json; charset=utf8")
+    public List<NavigationDto> getAllNavigationByNaviType(@PathVariable(value = "storetype") String storetype) {
+        return navigationServiceImpl.findAllByStoreType(storetype);
     }
 
 }

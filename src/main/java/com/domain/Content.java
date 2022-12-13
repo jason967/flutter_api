@@ -25,7 +25,7 @@ public class Content {
     private String image;
     private String shoppingBasket;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "view_type_id")
     private ViewType viewType;
 

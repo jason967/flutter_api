@@ -18,7 +18,7 @@ public class StoreType {
     private Long id;
     private String storeType;
 
-    @OneToMany(mappedBy = "storeType", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "storeType", cascade = CascadeType.ALL)
     List<Navigation> navigations = new ArrayList<Navigation>();
 
     public void addNavigation(Navigation navigation) {
