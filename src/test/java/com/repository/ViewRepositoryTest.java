@@ -1,7 +1,6 @@
 package com.repository;
 
-import com.domain.ViewType;
-import com.repository.ViewTypeRepository;
+import com.domain.View;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,31 +10,29 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
-
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ViewTypeRepositoryTest {
+class ViewRepositoryTest {
 
     @Autowired
-    private ViewTypeRepository viewTypeRepository;
+    private ViewRepository viewRepository;
 
     @AfterEach
     void cleanUpData(){
-        viewTypeRepository.deleteAll();
+        viewRepository.deleteAll();
     }
     @Test
     void findAllByNaviId() {
         int naviId = 100;
         for(int i=1;i<=10;i++) {
-            String viewType = "auto_carousel_0"+i;
+            String view = "auto_carousel_0"+i;
             String description = "viewType_test_0"+i;
             String component = "product_0"+i;
             int exposePriority = i;
             ///save : 존재 O-> update, 존재 X -> insert & update
-            viewTypeRepository.save(ViewType.builder()
+            viewRepository.save(View.builder()
 //                    .naviId(naviId)
-                    .viewType(viewType)
+                    .view(view)
                     .description(description)
                     .exposePriority(exposePriority)
                     .component(component)

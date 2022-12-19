@@ -9,19 +9,19 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@SequenceGenerator(name = "VIEW_TYPE_SEQ_GEN", sequenceName = "VIEW_TYPE_SEQ", initialValue = 1000, allocationSize = 1)
+@SequenceGenerator(name = "VIEW_SEQ_GEN", sequenceName = "VIEW_SEQ", initialValue = 1000, allocationSize = 1)
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class ViewType {
+public class View {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIEW_TYPE_SEQ_GEN")
-    @Column(name = "view_type_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIEW_SEQ_GEN")
+    @Column(name = "view_id")
     private Long id;
 
-    private String viewType;
+    private String view;
     private String component;
     private String title;
     private String subtitle;
@@ -31,33 +31,33 @@ public class ViewType {
     private String description;
     private int exposePriority;
 
-    @OneToMany(mappedBy = "viewType" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "view" ,cascade = CascadeType.ALL)
     private List<Content> contents = new ArrayList<>();
 
     public void addContent(Content content) {
         contents.add(content);
-        if (content.getViewType() != this) {
-            content.setViewType(this);
+        if (content.getView() != this) {
+            content.setView(this);
         }
     }
 
     @ManyToOne
-    @JoinColumn(name = "navigation_id")
-    private Navigation navigation;
+    @JoinColumn(name = "main_tab_id")
+    private MainTab mainTab;
 
-    public void setNavigation(Navigation navigation) {
-        if (this.navigation != null) {
-            this.navigation.getViewTypes().remove(this);
+    public void setMainTab(MainTab main_tab) {
+        if (this.mainTab != null) {
+            this.mainTab.getViews().remove(this);
         }
-        this.navigation = navigation;
-        if (!navigation.getViewTypes().contains(this)) {
-            navigation.getViewTypes().add(this);
+        this.mainTab = main_tab;
+        if (!main_tab.getViews().contains(this)) {
+            main_tab.getViews().add(this);
         }
     }
 
     @Builder
-    public ViewType(String viewType, String component, String title, String subtitle, String closingHour, String viewAll, String image, String description, int exposePriority) {
-        this.viewType = viewType;
+    public View(String view, String component, String title, String subtitle, String closingHour, String viewAll, String image, String description, int exposePriority) {
+        this.view = view;
         this.component = component;
         this.title = title;
         this.subtitle = subtitle;

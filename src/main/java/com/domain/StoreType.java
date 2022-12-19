@@ -8,23 +8,24 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@SequenceGenerator(name = "STORE_TYPE_SEQ_GEN", sequenceName = "STORE_TYPE_SEQ",initialValue = 10,allocationSize = 10)
 @Getter
 @NoArgsConstructor
 @Entity
 public class StoreType {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "STORE_TYPE_SEQ_GEN")
     @Column(name = "store_type_id")
     private Long id;
     private String storeType;
 
     @OneToMany(mappedBy = "storeType", cascade = CascadeType.ALL)
-    List<Navigation> navigations = new ArrayList<Navigation>();
+    List<MainTab> mainTabs = new ArrayList<MainTab>();
 
-    public void addNavigation(Navigation navigation) {
-        navigations.add(navigation);
-        if (navigation.getStoreType() != this) {
-            navigation.setStoreType(this);
+    public void addMainTabs(MainTab mainTab) {
+        mainTabs.add(mainTab);
+        if (mainTab.getStoreType() != this) {
+            mainTab.setStoreType(this);
         }
     }
 

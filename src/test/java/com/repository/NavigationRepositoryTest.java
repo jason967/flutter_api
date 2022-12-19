@@ -1,7 +1,6 @@
 package com.repository;
 
-import com.domain.Navigation;
-import com.repository.NavigationRepository;
+import com.domain.MainTab;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class NavigationRepositoryTest {
     @Autowired
-    private NavigationRepository navigationRepository;
+    private MainTabRepository mainTabRepository;
 
     @AfterEach
     public void deleteAll(){
-        navigationRepository.deleteAll();
+        mainTabRepository.deleteAll();
     }
 
     @Test
@@ -31,7 +30,7 @@ class NavigationRepositoryTest {
         String subtitle="자신있게 추천해요";
         String apiUrl = "https://www.naver.com";
         ///save : 존재 O-> update, 존재 X -> insert & update
-        navigationRepository.save(Navigation.builder()
+        mainTabRepository.save(MainTab.builder()
 //                .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
@@ -39,9 +38,9 @@ class NavigationRepositoryTest {
                 .build());
 
         //when
-        List<Navigation> navigationsList = navigationRepository.findAll();
+        List<MainTab> navigationsList = mainTabRepository.findAll();
 
-        Navigation navigation = navigationsList.get(0);
+        MainTab navigation = navigationsList.get(0);
 //        assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
 
@@ -56,16 +55,16 @@ class NavigationRepositoryTest {
         String apiUrl = "https://www.naver.com";
 
         ///save : 존재 O-> update, 존재 X -> insert & update
-        navigationRepository.save(Navigation.builder()
+        mainTabRepository.save(MainTab.builder()
 //                .naviId(naviId)
                 .title(title)
                 .subtitle(subtitle)
                 .apiUrl(apiUrl)
                 .build());
         //when
-        List<Navigation> navigationList = navigationRepository.findAll();
+        List<MainTab> navigationList = mainTabRepository.findAll();
 
-        Navigation navigation = navigationList.get(0);
+        MainTab navigation = navigationList.get(0);
 //        assertThat(navigation.getNaviId()).isEqualTo(naviId);
         assertThat(navigation.getTitle()).isEqualTo(title);
         assertThat(navigation.getSubtitle()).isEqualTo(subtitle);

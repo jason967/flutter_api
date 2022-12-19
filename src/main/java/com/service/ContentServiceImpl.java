@@ -4,21 +4,21 @@ import com.domain.Content;
 import com.repository.ContentRepository;
 import com.web.dto.ContentDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class ContentServiceImpl implements ContentService {
-    @Autowired
-    private ContentRepository contentRepository;
+    private final ContentRepository contentRepository;
 
     @Override
-    public List<ContentDto> findAllByViewTypeId(Long viewTypeId) {
-        List<Content> contents = contentRepository.findAllByViewType_Id(viewTypeId);
+    @Transactional(readOnly = true)
+    public List<ContentDto> findAllByViewId(Long viewTypeId) {
+        List<Content> contents = contentRepository.findAllByView_Id(viewTypeId);
 
         List<ContentDto> result = new ArrayList<>();
         for (Content content : contents) {

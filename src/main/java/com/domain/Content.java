@@ -26,16 +26,16 @@ public class Content {
     private String shoppingBasket;
 
     @ManyToOne
-    @JoinColumn(name = "view_type_id")
-    private ViewType viewType;
+    @JoinColumn(name = "view_id")
+    private View view;
 
-    public void setViewType(ViewType viewType) {
-        if (this.viewType != null) {
-            this.viewType.getContents().remove(this);
+    public void setView(View view) {
+        if (this.view != null) {
+            this.view.getContents().remove(this);
         }
-        this.viewType = viewType;
-        if (!viewType.getContents().contains(this)) {
-            viewType.getContents().add(this);
+        this.view = view;
+        if (!view.getContents().contains(this)) {
+            view.getContents().add(this);
         }
     }
 
